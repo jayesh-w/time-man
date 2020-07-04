@@ -1,9 +1,12 @@
-const isTime = require('./utils/isTime');
+const isTime = require('./utils/isTime.js');
+const _getFormat = require('./utils/getFormat.js');
+const addTimeSeconds = require('./addTimeSeconds.js');
+const addTimeMinutes = require('./addTimeMinutes.js');
 
 class Time {
     constructor(time,format='H:i:s') {
+        this.format = format;
         if(time) {
-            this.format = format;
             if(isTime(time,format)) {
                 this.time = time;
             }
@@ -29,11 +32,88 @@ class Time {
             return this.format;
         }
     }
+    getTime() {
+        return this.time;
+    }
     logTime() {
         if(this.time) {
             console.log(this.time);
         }
     }
+    addTime(time) {
+        if(typeof(time) == 'object') {
+            const format = time.getFormat();
+            if(format == 'H:i:s') {
+                this.time = addTimeSeconds(this.time,time.getTime());
+            }
+            if(format == 'H:i') {
+                this.time = addTimeMinute(this.time,time.getTime());
+            }
+        }
+        else {
+            try {
+                const format = _getFormat(time);
+                if(isTime(time,format)) {
+                    if(format != this.format) {
+                        throw "Format Doesn't Match!";
+                    }
+                    else {
+                        if(format == 'H:i:s') {
+                        this.time = addTimeSeconds(this.time,time);
+                        }
+                        if(format == 'H:i') {
+                            this.time = addTimeMinutes(this.time,time);
+                        }
+                    }
+                }
+                else {
+                    throw "Invalid Time Provided in argument!";
+                }
+            }
+            catch(err) {
+                console.log(err);
+            }
+        }
+        
+    }
+    subtractTime(time) {
+        if(typeof(time) == 'object') {
+            const format = time.getFormat();
+            if(format == 'H:i:s') {
+                this.time = subTimeSeconds(this.time,time.getTime());
+            }
+            if(format == 'H:i') {
+                this.time = subTimeMinute(this.time,time.getTime());
+            }
+        }
+        else {
+            try {
+                const format = _getFormat(time);
+                if(isTime(time,format)) {
+                    if(format != this.format) {
+                        throw "Format Doesn't Match!";
+                    }
+                    else {
+                        if(format == 'H:i:s') {
+                        this.time = subTimeSeconds(this.time,time);
+                        }
+                        if(format == 'H:i') {
+                            this.time = subTimeMinutes(this.time,time);
+                        }
+                    }
+                }
+                else {
+                    throw "Invalid Time Provided in argument!";
+                }
+            }
+            catch(err) {
+                console.log(err);
+            }
+        }
+        
+    }
+
+
 
     static functions() {
         const functions = {
