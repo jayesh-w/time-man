@@ -18,5 +18,4 @@ const averageTime = (time_array) => {
     const average = Math.floor(sum/(time_array.length - offset));
     return deconvert(average,'H:i:s');
 }
-
 module.exports = averageTime;

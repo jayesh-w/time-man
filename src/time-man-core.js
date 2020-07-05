@@ -2,7 +2,8 @@ const isTime = require('./utils/isTime.js');
 const _getFormat = require('./utils/getFormat.js');
 const addTimeSeconds = require('./addTimeSeconds.js');
 const addTimeMinutes = require('./addTimeMinutes.js');
-
+const deconvert = require('./utils/deconvert.js');
+const timeZones = require('./utils/timeZones.js');
 class Time {
     constructor(time,format='H:i:s') {
         this.format = format;
@@ -32,6 +33,23 @@ class Time {
             return this.format;
         }
     }
+    getTime_12Hr() {
+      const time = this.time.split(':');
+      let suffix = 'AM';
+      let hour = time[0];
+      if(hour > 12) {
+        hour = hour - 12;
+        suffix = 'PM';
+      }
+      if(hour == 12) suffix = 'PM';
+      if(hour < 10) hour = '0'+hour;
+      if(this.format == 'H:i:s') {
+        return hour+':'+time[1]+':'+time[2]+ " "+suffix;
+      }
+      else {
+        return hour+':'+time[1]+ " "+suffix;
+      }
+    }
     getTime() {
         return this.time;
     }
@@ -40,6 +58,26 @@ class Time {
             console.log(this.time);
         }
     }
+
+    getTimeZone() {
+      const TimeZoneOffset = new Date().getTimezoneOffset();
+      const TimeZone_fixed = deconvert(Math.abs(TimeZoneOffset),'H:i');
+      let timezone = "";
+      for(let tz of timeZones) {
+        if((-TimeZoneOffset/60) == tz.value) {
+          timezone = tz.text;
+        }
+      }
+      if(timezone == "") {
+        let suffix = '';
+        if(TimeZoneOffset < 0) suffix = '+';
+        else suffix = '-';
+        timezone = 'GMT/UTC'+suffix+TimeZone_fixed+'city not found!';
+      }
+      return timezone;
+
+    }
+
     addTime(time) {
         if(typeof(time) == 'object') {
             const format = time.getFormat();
@@ -74,7 +112,7 @@ class Time {
                 console.log(err);
             }
         }
-        
+
     }
     subtractTime(time) {
         if(typeof(time) == 'object') {
@@ -110,22 +148,12 @@ class Time {
                 console.log(err);
             }
         }
-        
     }
+    
 
 
 
-    static functions() {
-        const functions = {
-            Time: 'Declare a Time variable with format H:i or h:i',
-            logTime: 'Logs the time',
-            addTime: 'addTime(object) adds two times'
-        }
-        console.log('Function : Description')
-        for (let [key, value] of Object.entries(functions)) {
-            console.log(`${key}: ${value}`);
-          }
-    }
+
 }
-
+module.exports = require('./averageTime.js');
 module.exports = Time;
