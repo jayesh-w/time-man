@@ -74,10 +74,10 @@ Method | Description
 ------------ | -------------
 string averageTime([Array of Times) | Returns average of Time.
 object TimeSlicer([from time][to time][per Slot time]) | Returns an object of slotted Time.
-string UnixTimeStamp | get the current Unix Time Stamp
-string CurrentDate | get the current Date
-string TimeStamp | get SQL friendly TimeStamp eg 2020-12-12 23:23:23 
-string TimeZone | get Current TimeZone(same as getTimeZone)
+string UnixTimeStamp() | get the current Unix Time Stamp
+string CurrentDate() | get the current Date
+string TimeStamp() | get SQL friendly TimeStamp eg 2020-12-12 23:23:23 
+string TimeZone() | get Current TimeZone(same as getTimeZone)
 
 
 
