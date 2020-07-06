@@ -3,15 +3,20 @@
 
 ----
 ## Installation
-####1. NPM
+#### 1. NPM
 
-```
+```bash
 $npm install time-man
 ```
+and then 
 
-####2. Script Tag
-
+```js
+const Time = require('time-man');
 ```
+
+#### 2. Script Tag
+
+```html
 <script src=""></script>
 ```
 
@@ -21,7 +26,7 @@ $npm install time-man
 2. Basic add/subtract,average and more handy functions.
 
 ----
-###Declare a time object
+### Declare a time object
 
 ```js
 
@@ -77,5 +82,5 @@ object TimeSlot([from time][to time][number of slots]) | Returns an object of sl
 Author Jayesh Waghmare
 
 ----
-##License 
+## License 
 MIT
