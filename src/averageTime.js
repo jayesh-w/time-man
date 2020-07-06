@@ -5,7 +5,7 @@ const deconvert = require('./utils/deconvert');
 const averageTime = (time_array) => {
     let sum = 0;
     let offset = 0;
-    for(time of time_array) {
+    for(var time of time_array) {
         format = getFormat(time);
         if(format == 'H:i') time = time+':00';
         if(isTime(time,'H:i:s')) {
