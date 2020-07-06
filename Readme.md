@@ -88,8 +88,8 @@ string TimeZone() | get Current TimeZone(same as getTimeZone)
 
 ----
 ## People
-Author Jayesh Waghmare
+Author [Jayesh Waghmare](https://github.com/jayesh-w)
 
 ----
 ## License 
-MIT
+[MIT](LICENSE)
