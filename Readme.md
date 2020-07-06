@@ -17,7 +17,12 @@ const Time = require('time-man');
 #### 2. Script Tag
 
 ```html
-<script src=""></script>
+<script src="dist/time-man.min.js"></script>
+
+<!-- or ---->
+
+<script src="dist/time-man.js"><script>
+
 ```
 
 ----
